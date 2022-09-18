@@ -4,8 +4,8 @@ import fr.bretzel.minestomstates.state.Axis;
 import net.minestom.server.instance.block.Block;
 import org.jetbrains.annotations.NotNull;
 
-public class AxisBlockStates extends WaterloggedState {
-    public AxisBlockStates(Block alternative) {
+public class AxisBlockBlockState extends WaterloggedState {
+    public AxisBlockBlockState(Block alternative) {
         super(alternative);
     }
 
@@ -19,7 +19,7 @@ public class AxisBlockStates extends WaterloggedState {
 
     @NotNull
     @Override
-    public AxisBlockStates clone() {
-        return new AxisBlockStates(block());
+    public AxisBlockBlockState clone() {
+        return new AxisBlockBlockState(block());
     }
 }

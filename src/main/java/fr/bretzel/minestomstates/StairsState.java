@@ -6,9 +6,9 @@ import fr.bretzel.minestomstates.state.StairsShape;
 import net.minestom.server.instance.block.Block;
 import org.jetbrains.annotations.NotNull;
 
-public class StairsSate extends WaterloggedState {
+public class StairsState extends WaterloggedState {
 
-    public StairsSate(Block block) {
+    public StairsState(Block block) {
         super(block);
     }
 
@@ -38,7 +38,7 @@ public class StairsSate extends WaterloggedState {
 
     @NotNull
     @Override
-    public StairsSate clone() {
-        return new StairsSate(block());
+    public StairsState clone() {
+        return new StairsState(block());
     }
 }

@@ -1,6 +1,5 @@
 package fr.bretzel.minestomstates.state;
 
-import fr.bretzel.minestomstates.State;
 import org.jetbrains.annotations.NotNull;
 
 public final class BooleanState implements State<Boolean> {
@@ -14,7 +13,7 @@ public final class BooleanState implements State<Boolean> {
     }
 
     private BooleanState(Boolean value) {
-        this("key", value);
+        this(null, value);
     }
 
     private BooleanState(String key) {

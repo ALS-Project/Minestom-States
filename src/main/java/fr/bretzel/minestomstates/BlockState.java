@@ -2,6 +2,7 @@ package fr.bretzel.minestomstates;
 
 import fr.bretzel.minestomstates.error.StateError;
 import fr.bretzel.minestomstates.error.UnknownBlockStatesKey;
+import fr.bretzel.minestomstates.state.State;
 import net.minestom.server.instance.block.Block;
 import net.minestom.server.instance.block.BlockHandler;
 import net.minestom.server.item.ItemStack;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class BlockState {
     private final HashMap<String, String> block_states = new HashMap<>();
@@ -42,7 +44,7 @@ public class BlockState {
         private_set(key.getKey(), value.getValue());
     }
 
-    public <T> void set(State<T> key, T value) {
+    public <T extends Comparable<T>> void set(State<T> key, T value) {
         private_set(key.getKey(), String.valueOf(value));
     }
 
@@ -50,27 +52,27 @@ public class BlockState {
         private_set(state.getKey(), state.getValue());
     }
 
-    public <T> T get(State<T> stateKey) {
+    public <T extends Comparable<T>> T get(State<T> stateKey) {
         return stateKey.parse(block_states.get(stateKey.getKey()));
     }
 
-    public <T extends State<T>> T get(Class<T> type) {
+    public <T extends State<T> & Comparable<T>> T get(Class<T> type) {
         if (type.isEnum()) {
             return get(type.getEnumConstants()[0]);
         } else {
-            throw new StateError("Error, you need to specify a key for the blocksate " + type.getSimpleName());
+            throw new StateError("You need to specify a key for the state " + type.getSimpleName());
         }
     }
 
-    public <T extends State<T>> T get(State<?> key, Class<T> type) {
+    public <T extends State<T> & Comparable<T>> T get(State<?> key, Class<T> type) {
         if (type.isEnum()) {
             return type.getEnumConstants()[0].parse(getRaw(key.getKey()));
         } else {
-            throw new StateError("Error, you need to specify a key for the blocksate " + type.getSimpleName());
+            throw new StateError("You need to specify a key for the state " + type.getSimpleName());
         }
     }
 
-    public <T extends State<T>> T getOr(Class<T> stateKey, T miss) {
+    public <T extends State<T> & Comparable<T>> T getOr(Class<T> stateKey, T miss) {
         try {
             return miss.getClass().equals(stateKey) ? get(stateKey) : miss;
         } catch (Exception e) {
@@ -106,14 +108,14 @@ public class BlockState {
     }
 
     @SafeVarargs
-    public final <T> List<T> getStates(State<T>... stateKeys) {
+    public final <T extends Comparable<T>> List<T> getStates(State<T>... stateKeys) {
         List<T> list = new ArrayList<>();
         for (State<T> stateKey : stateKeys)
             list.add(get(stateKey));
         return list;
     }
 
-    public <T extends State<T>> List<T> getAllStateValue(Class<T> type) {
+    public <T extends State<T> & Comparable<T>> List<T> getAllStateValue(Class<T> type) {
         if (type.isEnum()) {
             List<T> valueT = new ArrayList<>();
             T valueState = type.getEnumConstants()[0];
@@ -174,8 +176,14 @@ public class BlockState {
     @Override
     public String toString() {
         return "BlockState{" +
-                "states=" + "" +
+                "states=" + mapToString(block_states) +
                 ", block=" + block.namespace() +
                 '}';
+    }
+
+    private String mapToString(Map<?, ?> map) {
+        return map.keySet().stream()
+                .map(key -> key + "=" + map.get(key))
+                .collect(Collectors.joining(", ", "{", "}"));
     }
 }

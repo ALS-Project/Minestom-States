@@ -16,13 +16,13 @@ public class BlockStateManager {
         else if (block == Block.SCAFFOLDING)
             return new ScaffoldingState(block);
         else if (block.name().endsWith("stairs"))
-            return new StairsSate(block);
+            return new StairsState(block);
         else if (block.name().contains("fence_gate"))
             return new FenceGateState(block);
         else if (block.name().contains("wall"))
             return new WallState(block);
         else if (block.properties().containsKey("axis"))
-            return new AxisBlockStates(block);
+            return new AxisBlockBlockState(block);
         return new BlockState(block);
     }
 }

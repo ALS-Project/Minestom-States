@@ -1,6 +1,5 @@
 package fr.bretzel.minestomstates.state;
 
-import fr.bretzel.minestomstates.State;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.stream.Stream;

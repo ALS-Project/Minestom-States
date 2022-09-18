@@ -1,6 +1,5 @@
 package fr.bretzel.minestomstates.state;
 
-import fr.bretzel.minestomstates.State;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.instance.block.BlockFace;
 import net.minestom.server.utils.Direction;

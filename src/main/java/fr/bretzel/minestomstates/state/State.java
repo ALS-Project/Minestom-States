@@ -1,8 +1,8 @@
-package fr.bretzel.minestomstates;
+package fr.bretzel.minestomstates.state;
 
 import org.jetbrains.annotations.NotNull;
 
-public interface State<T> {
+public interface State<T extends Comparable<T>> {
 
     @NotNull
     String getKey();

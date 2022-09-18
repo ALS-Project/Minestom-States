@@ -1,4 +1,4 @@
-import fr.bretzel.minestomstates.States;
+import fr.bretzel.minestomstates.BlockState;
 import fr.bretzel.minestomstates.BlockStateManager;
 import fr.bretzel.minestomstates.WaterloggedState;
 import net.minestom.server.MinecraftServer;
@@ -10,7 +10,7 @@ public class Demo {
 
     public void demoWaterLogged() {
         //Get the block state of a block with the BlockStateManager.get(block)
-        States state = BlockStateManager.get(Block.SEA_PICKLE);
+        BlockState state = BlockStateManager.get(Block.SEA_PICKLE);
 
         //Cast to a WaterLogged State
         WaterloggedState waterloggedState = (WaterloggedState) state;
