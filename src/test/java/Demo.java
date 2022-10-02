@@ -1,6 +1,6 @@
-import fr.bretzel.minestomstates.BlockState;
-import fr.bretzel.minestomstates.BlockStateManager;
-import fr.bretzel.minestomstates.WaterloggedState;
+import fr.bretzel.minestom.states.BlockState;
+import fr.bretzel.minestom.states.BlockStateManager;
+import fr.bretzel.minestom.states.WaterloggedState;
 import net.minestom.server.MinecraftServer;
 import net.minestom.server.coordinate.Pos;
 import net.minestom.server.instance.Instance;

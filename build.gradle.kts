@@ -1,9 +1,9 @@
 plugins {
     id("java")
-    `maven-publish`
+    id("maven-publish")
 }
 
-group = "fr.bretzel.blockstates"
+group = "fr.bretzel.minestom.states"
 version = "1.0-SNAPSHOT"
 
 repositories {
