@@ -1,10 +1,13 @@
 plugins {
-    id("java")
-    id("maven-publish")
+    `kotlin-dsl`
+    `maven-publish`
+    java
 }
 
+var minestomVersion = "42195c536b"
+
 group = "fr.bretzel.minestom.states"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 repositories {
     mavenCentral()
@@ -12,17 +15,6 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.Minestom:Minestom:18c46481f4")
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            groupId = project.properties["group"] as? String?
-            artifactId = project.name
-            version = project.properties["version"] as? String?
-
-            from(components["java"])
-        }
-    }
+    //Minestom
+    implementation("com.github.Minestom:Minestom:$minestomVersion")
 }
