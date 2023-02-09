@@ -4,7 +4,7 @@ plugins {
     java
 }
 
-var minestomVersion = "42195c536b"
+var minestomVersion = "aebf72de90"
 
 group = "fr.bretzel.minestom.states"
 version = "1.0.0"
