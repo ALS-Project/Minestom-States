@@ -1,14 +1,12 @@
 package fr.bretzel.minestom.states;
 
-import fr.bretzel.minestom.states.state.State;
 import fr.bretzel.minestom.states.error.StateError;
 import fr.bretzel.minestom.states.error.UnknownBlockStatesKey;
+import fr.bretzel.minestom.states.state.State;
 import net.minestom.server.instance.block.Block;
 import net.minestom.server.instance.block.BlockHandler;
-import net.minestom.server.item.ItemStack;
 import org.jetbrains.annotations.ApiStatus;
 import org.jglrxavpok.hephaistos.nbt.NBTCompound;
-import org.jglrxavpok.hephaistos.nbt.mutable.MutableNBTCompound;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +23,8 @@ public class BlockState {
     private NBTCompound blockNbt;
 
     protected BlockState(Block block) {
+        this.blockHandler = block.handler();
+        this.blockNbt = block.nbt();
         this.block = block;
         //Copy All Entry
         block_states.putAll(block.properties());
@@ -132,25 +132,6 @@ public class BlockState {
         }
     }
 
-    public void setBlockHandler(BlockHandler blockHandler) {
-        this.blockHandler = blockHandler;
-    }
-
-    public void setBlockNbt(ItemStack stack) {
-        NBTCompound itemNBT = stack.toItemNBT();
-
-        if (itemNBT.containsKey("tag")) {
-            MutableNBTCompound nbt = itemNBT.getCompound("tag").toMutableCompound();
-            nbt.remove("id");
-            nbt.remove("Count");
-            if (nbt.containsKey("BlockEntityTag")) {
-                this.blockNbt = nbt.getCompound("BlockEntityTag");
-            } else {
-                this.blockNbt = nbt.toCompound();
-            }
-        }
-    }
-
     public Block block() {
         if (blockHandler != null)
             block = block.withHandler(blockHandler);
@@ -168,8 +149,8 @@ public class BlockState {
     public void withBlock(Block block) {
         block_states.clear();
         this.block = block;
-        this.blockNbt = null;
-        this.blockHandler = null;
+        this.blockNbt = block.nbt();
+        this.blockHandler = block.handler();
         block_states.putAll(block.properties());
     }
 
