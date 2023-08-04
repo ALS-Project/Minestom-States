@@ -1,7 +1,7 @@
 package fr.bretzel.minestom.states;
 
-import fr.bretzel.minestom.states.state.Half;
 import fr.bretzel.minestom.states.state.Facing;
+import fr.bretzel.minestom.states.state.Half;
 import fr.bretzel.minestom.states.state.StairsShape;
 import net.minestom.server.instance.block.Block;
 import org.jetbrains.annotations.NotNull;
